@@ -1,0 +1,128 @@
+/* ===== Dashboard Wrapper with Background ===== */
+.dashboard-wrapper {
+  min-height: 100vh;
+  background-image: url("medical8.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: #dccac7;
+}
+/* Add spacing below Welcome heading */
+.dashboard-card h2 {
+  margin-bottom: 20px;
+  color: #fcfcff;
+}
+
+/* Move Upcoming Reminders heading a bit lower + change color */
+.section-header h3 {
+  color: #111010;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Improve reminder display (medicine/time/date) */
+.reminder-item {
+  background-color: #070809;
+  margin-bottom: 12px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  border-left: 4px solid #f9fefe;
+}
+
+.reminder-item strong {
+  color: #0d47a1; /* medicine name color */
+}
+
+.reminder-item span {
+  color: #444;
+}
+
+/* Optional: Make time part a different color */
+.reminder-item .time {
+  color: #007bff;
+  font-weight: 500;
+}
+
+
+/* ===== Dashboard Card Styling ===== */
+.dashboard-card {
+  position: relative;
+  padding-bottom: 80px; 
+  min-height: 400px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Buttons Bottom पर ===== */
+.dashboard-buttons {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* ===== Button Common Style ===== */
+.dashboard-btn {
+  background-color: #2091ce;
+  color: white;
+  padding: 6px 10px;
+  height: 20px;
+  min-width: 70px;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.dashboard-btn:hover {
+  background-color: #005f87;
+}
+
+/* ===== Section Header ===== */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 16px;
+}
+
+/* ===== Reminders List ===== */
+.reminder-list {
+  list-style: none;
+  padding: 0;
+}
+
+.reminder-item {
+  background-color: #f0faff;
+  margin-bottom: 12px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  border-left: 4px solid #00b3b3;
+}
+
+.pill-icon {
+  margin-right: 6px;
+}
+
+.no-reminder-msg {
+  color: gray;
+  margin-top: 1rem;
+}

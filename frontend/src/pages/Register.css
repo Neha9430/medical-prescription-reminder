@@ -1,0 +1,73 @@
+/* src/pages/Register.css */
+
+.register-page {
+  background-image: url("m1.avif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.register-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: rgb(58, 58, 185);
+  text-align: center;
+}
+
+.register-card h2 {
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.register-card input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.963);
+  color: rgb(16, 13, 13);
+  font-size: 16px;
+}
+
+.register-card input::placeholder {
+  color: rgba(12, 11, 11, 0.7);
+}
+
+.register-card button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background-color: #0077b6;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.register-card button:hover {
+  background-color: #008ecc;
+}
+
+.register-card p {
+  margin-top: 16px;
+}
+
+.register-card a {
+  color: #0d1112;
+  text-decoration: underline;
+}

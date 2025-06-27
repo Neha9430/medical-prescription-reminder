@@ -1,0 +1,86 @@
+/* Background and center */
+.upload-prescription-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-image: url("medical4.jpg"); /* 👈 make sure this path is correct */
+  background-size: cover;
+  background-position: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Glass effect card */
+.upload-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: #2d2d7f;
+}
+
+/* Headings */
+.upload-card h2 {
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #25255b;
+}
+
+/* Buttons */
+.upload-btn,
+.save-btn,
+.back-btn {
+  padding: 10px 20px;
+  background-color: #2091ce;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px 8px;
+  transition: all 0.3s ease-in-out;
+}
+
+.upload-btn:hover,
+.save-btn:hover,
+.back-btn:hover {
+  background-color: #0a6b9c;
+}
+
+/* Input fields */
+input[type="file"],
+input[type="date"],
+input[type="time"] {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 80%;
+}
+
+/* Reminder preview block */
+.extracted-block {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 20px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+}
+
+.success-msg {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.medicine-group {
+  margin: 15px 0;
+}
