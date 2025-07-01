@@ -1,5 +1,6 @@
 import React from "react";
 import { jwtDecode } from "jwt-decode";
+import API_BASE_URL from "../config";
 
 import { GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
@@ -13,7 +14,7 @@ const GoogleLoginButton = () => {
     console.log("Google User Info:", decoded);
 
     try {
-      const res = await axios.post("http://localhost:5000/api/users/google-login", {
+      const res = await axios.post(`${API_BASE_URL}/api/users/google-login`, {
         name: decoded.name,
         email: decoded.email,
       });

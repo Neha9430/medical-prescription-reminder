@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./Dashboard.css";
+import API_BASE_URL from "../config";
 
 const Dashboard = () => {
   const name = localStorage.getItem("name") || "User";
@@ -20,7 +21,7 @@ const Dashboard = () => {
       if (!userId) return;
       try {
         const res = await axios.get(
-          `http://localhost:5000/api/reminders/upcoming/${userId}`
+          `${API_BASE_URL}/api/reminders/upcoming/${userId}`
         );
         setReminders(res.data);
       } catch (error) {
@@ -38,16 +39,16 @@ const Dashboard = () => {
           <center>
             <h2>Welcome {name} to your Dashboard</h2>
           </center>
-          
+
           <div className="section-header">
             <h3>Upcoming Reminders (Next few)</h3>
 
             <div className="dashboard-buttons">
               <Link to="/upload-prescription" className="dashboard-btn">
-                 Add Prescription
+                Add Prescription
               </Link>
               <Link to="/upcoming-reminders" className="dashboard-btn">
-                 View All
+                View All
               </Link>
               <Link to="/profile" className="dashboard-btn">
                 My Profile

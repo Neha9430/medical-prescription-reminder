@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./UpcomingReminders.css";
+import API_BASE_URL from "../config";
 
 // 🔧 Fix timezone issue for input type="date"
 const getLocalDate = (dateString) => {
@@ -25,7 +26,7 @@ const UpcomingReminders = () => {
   const fetchReminders = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/reminders/upcoming/${userId}`,
+        `${API_BASE_URL}/api/reminders/upcoming/${userId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -48,31 +49,30 @@ const UpcomingReminders = () => {
   };
 
   // ✅ Mark Reminder as Taken
-const markAsTaken = async (id) => {
-  try {
-    await axios.put(
-      `http://localhost:5000/api/reminders/taken/${id}`,
-      {},
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
-    alert("Marked as taken!");
-    fetchReminders(); // refresh reminders
-  } catch (err) {
-    console.error("Failed to mark as taken", err);
-    alert("Error marking reminder");
-  }
-};
-
+  const markAsTaken = async (id) => {
+    try {
+      await axios.put(
+         `${API_BASE_URL}/api/reminders/taken/${id}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      alert("Marked as taken!");
+      fetchReminders(); // refresh reminders
+    } catch (err) {
+      console.error("Failed to mark as taken", err);
+      alert("Error marking reminder");
+    }
+  };
 
   // ✅ Save Updated Reminder
   const handleUpdate = async () => {
     try {
       await axios.put(
-        `http://localhost:5000/api/reminders/update/${editReminderId}`,
+        `${API_BASE_URL}/api/reminders/update/${editReminderId}`,
         { date: editDate, reminderTime: editTime },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -89,10 +89,11 @@ const markAsTaken = async (id) => {
 
   // 🗑️ Delete Reminder
   const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this reminder?")) return;
+    if (!window.confirm("Are you sure you want to delete this reminder?"))
+      return;
 
     try {
-      await axios.delete(`http://localhost:5000/api/reminders/delete/${id}`, {
+      await axios.delete(`${API_BASE_URL}/api/reminders/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Reminder deleted!");
@@ -110,58 +111,64 @@ const markAsTaken = async (id) => {
       {reminders.length === 0 ? (
         <p>No reminders found.</p>
       ) : (
-
         <div className="reminder-scroll-area">
-        <div className="reminder-grid">
-          {reminders.map((reminder) => (
-            <div className="reminder-card" key={reminder._id}>
-              <h3>{reminder.medicineName}</h3>
+          <div className="reminder-grid">
+            {reminders.map((reminder) => (
+              <div className="reminder-card" key={reminder._id}>
+                <h3>{reminder.medicineName}</h3>
 
-              {editReminderId === reminder._id ? (
-                <>
-                  <input
-                    type="date"
-                    value={editDate}
-                    onChange={(e) => setEditDate(e.target.value)}
-                  />
-                  <input
-                    type="time"
-                    value={editTime}
-                    onChange={(e) => setEditTime(e.target.value)}
-                  />
-                  <button onClick={handleUpdate}>Save</button>
-                  <button onClick={() => setEditReminderId(null)}>Cancel</button>
-                </>
-              ) : (
-                <>
-                  <p>
-                    <strong>Date:</strong>{" "}
-                    {new Date(reminder.date).toLocaleDateString()}
-                  </p>
-                  <p>
-                    <strong>Time:</strong> {reminder.reminderTime}
-                  </p>
-                  {!reminder.taken && (
-  <button onClick={() => markAsTaken(reminder._id)}>Mark as Taken</button>
-)}
+                {editReminderId === reminder._id ? (
+                  <>
+                    <input
+                      type="date"
+                      value={editDate}
+                      onChange={(e) => setEditDate(e.target.value)}
+                    />
+                    <input
+                      type="time"
+                      value={editTime}
+                      onChange={(e) => setEditTime(e.target.value)}
+                    />
+                    <button onClick={handleUpdate}>Save</button>
+                    <button onClick={() => setEditReminderId(null)}>
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p>
+                      <strong>Date:</strong>{" "}
+                      {new Date(reminder.date).toLocaleDateString()}
+                    </p>
+                    <p>
+                      <strong>Time:</strong> {reminder.reminderTime}
+                    </p>
+                    {!reminder.taken && (
+                      <button onClick={() => markAsTaken(reminder._id)}>
+                        Mark as Taken
+                      </button>
+                    )}
 
-                  <p>
-  <strong>Status:</strong>{" "}
-  {reminder.taken
-    ? " Taken"
-    : new Date(reminder.date) < new Date()
-    ? " Missed"
-    : "Upcoming"}
-</p>
+                    <p>
+                      <strong>Status:</strong>{" "}
+                      {reminder.taken
+                        ? " Taken"
+                        : new Date(reminder.date) < new Date()
+                        ? " Missed"
+                        : "Upcoming"}
+                    </p>
 
-                  <button onClick={() => startEdit(reminder)}> Edit</button>
-                </>
-              )}
+                    <button onClick={() => startEdit(reminder)}> Edit</button>
+                  </>
+                )}
 
-              <button onClick={() => handleDelete(reminder._id)}> Delete</button>
-            </div>
-          ))}
-        </div>
+                <button onClick={() => handleDelete(reminder._id)}>
+                  {" "}
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -169,10 +176,10 @@ const markAsTaken = async (id) => {
         onClick={() => navigate("/upload-prescription")}
         className="back-btn"
       >
-         Back to Upload Prescription
+        Back to Upload Prescription
       </button>
       <button onClick={() => navigate("/dashboard")} className="back-btn">
-         Back to Dashboard
+        Back to Dashboard
       </button>
     </div>
   );
