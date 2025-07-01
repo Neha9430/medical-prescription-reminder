@@ -16,7 +16,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ CORS setup for React frontend (localhost + Render)
+// ✅ FINAL CORS setup for frontend (localhost + Render)
 const allowedOrigins = [
   "http://localhost:3000",
   "https://medical-reminder-frontend.onrender.com"
@@ -30,12 +30,16 @@ app.use(cors({
       callback(new Error("Not allowed by CORS"));
     }
   },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true,
 }));
 
-// Middlewares
+// ✅ These middlewares should come AFTER cors()
 app.use(bodyParser.json());
 app.use(express.json());
+
+// ✅ Handle preflight requests (CORS OPTIONS requests)
+app.options("*", cors());
 
 // Routes
 app.use("/api/users", userRoutes);
