@@ -14,7 +14,7 @@ const __dirname = dirname(__filename);
 dotenv.config();
 
 const client = new vision.ImageAnnotatorClient({
-  keyFilename: path.join(__dirname, "../medicalocr-457703.json"),
+  keyFilename: path.join(__dirname, ".../medicalocr-457703.json"),
 });
 
 export const getUserPrescriptions = async (req, res) => {

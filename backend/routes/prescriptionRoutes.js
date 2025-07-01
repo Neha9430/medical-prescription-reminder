@@ -10,6 +10,6 @@ const router = express.Router();
 router.post("/upload-prescription", authMiddleware, upload.single("image"), uploadPrescription); 
 router.post("/upload", authMiddleware, uploadPrescription);
 router.get("/history", authMiddleware, getUserPrescriptions);
-router.delete("/delete/:id", deletePrescription);
+router.delete("/delete/id", deletePrescription);
 
 export default router;

@@ -15,8 +15,6 @@ router.post("/login", loginUser);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);
 router.post("/google-login", googleLoginUser);
-
-
 router.get("/history", authMiddleware, getUserHistory);
 
 export default router;
