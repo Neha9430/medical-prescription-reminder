@@ -42,11 +42,11 @@ app.use(express.json());
 app.options("*", cors());
 
 // Routes
-app.use("/api/users", userRoutes);
+/*app.use("/api/users", userRoutes);
 app.use("/api/prescriptions", prescriptionRoutes);
 app.use("/api/ocr", ocrRoutes);
 app.use("/api/reminders", reminderRoutes);
-app.use("/api/ai", aiRoutes);
+app.use("/api/ai", aiRoutes);*/
 
 // Test Route
 app.get("/", (req, res) => {
@@ -61,5 +61,5 @@ connectDB()
 // Start Server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  startReminderScheduler(); // 🕐 Reminders scheduler
+  //startReminderScheduler(); // 🕐 Reminders scheduler
 });
