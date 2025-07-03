@@ -17,29 +17,20 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ✅ FINAL CORS setup for frontend (localhost + Render)
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://medical-reminder-frontend.onrender.com"
-];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
+  origin: ["http://localhost:3000", "https://medical-reminder-frontend.onrender.com"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
+  credentials: true
 }));
+
 
 // ✅ These middlewares should come AFTER cors()
 app.use(bodyParser.json());
 app.use(express.json());
 
-// ✅ Handle preflight requests (CORS OPTIONS requests)
-app.options("*", cors());
+
+
 
 // Routes
 app.use("/api/users", userRoutes);
