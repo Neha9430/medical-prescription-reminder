@@ -13,12 +13,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config();
 
-const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
-
 const client = new vision.ImageAnnotatorClient({
-  credentials,
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
 });
-
 
 export const getUserPrescriptions = async (req, res) => {
   try {
@@ -29,6 +26,8 @@ export const getUserPrescriptions = async (req, res) => {
     res.json({ prescriptions });
   } catch (error) {
     console.error("🔴 Error fetching prescriptions:", error.message);
+    console.log("Trigger redeploy");
+
     res.status(500).json({ message: "Server error" });
   }
 };
@@ -40,11 +39,11 @@ export const deletePrescription = async (req, res) => {
     await Prescription.findByIdAndDelete(id);
     res.status(200).json({ message: "Prescription deleted successfully" });
   } catch (err) {
-    res.status(500).json({ message: "Failed to delete prescription", error: err.message });
+    res
+      .status(500)
+      .json({ message: "Failed to delete prescription", error: err.message });
   }
 };
-
-
 
 export const uploadPrescription = async (req, res) => {
   try {
