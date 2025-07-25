@@ -18,20 +18,21 @@ const PORT = process.env.PORT || 5000;
 
 // ✅ FINAL CORS setup for frontend (localhost + Render)
 
-app.use(cors({
-  origin: ["http://localhost:3000", "https://medical-reminder-frontend.onrender.com"],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true
-}));
-app.options("*", cors()); 
-
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://medical-reminder-frontend.onrender.com",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
+app.options("*", cors());
 
 // ✅ These middlewares should come AFTER cors()
 app.use(bodyParser.json());
 app.use(express.json());
-
-
-
 
 // Routes
 app.use("/api/users", userRoutes);

@@ -13,8 +13,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 dotenv.config();
 
-const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON); // ✅
-const client = new vision.ImageAnnotatorClient({ credentials }); 
+const client = new vision.ImageAnnotatorClient({
+  keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+});
+
 
 export const getUserPrescriptions = async (req, res) => {
   try {
