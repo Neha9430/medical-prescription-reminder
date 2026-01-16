@@ -13,7 +13,11 @@ const authMiddleware = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET); // 🔐 .env में होना चाहिए
     const user = await User.findById(decoded.userId).select("-password"); // password hide
-
+    
+    console.log("✅ Token Received:", token);
+    console.log("✅ Decoded UserID:", decoded.userId);
+    console.log("✅ User From DB:", user);
+    
     if (!user) {
       return res.status(401).json({ message: "Invalid user" });
     }
@@ -22,6 +26,7 @@ const authMiddleware = async (req, res, next) => {
     next();
   } catch (err) {
     res.status(401).json({ message: "Token invalid or expired" });
+    
   }
 };
 
